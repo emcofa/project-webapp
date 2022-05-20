@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Home from "./components/Home";
+import Delays from "./components/delays/Delays";
 import StationsNavigate from "./components/stations/StationsNavigate";
 import Messages from "./components/messages/Messages";
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,10 +18,9 @@ LogBox.ignoreLogs([
   "EdgeInsetsPropType will be removed",
 ])
 
-
 const routeIcons = {
-  "Stationer": "md-walk-sharp",
-  "Tåg": "train-outline",
+  "Trafikinfo": "train-outline",
+  "Tåg": "information-circle-outline",
   "Trafikmeddelanden": "notifications-outline",
 };
 
@@ -41,15 +40,15 @@ export default function App() {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#1e90ff',
+          tabBarActiveTintColor: '#000',
           tabBarInactiveTintColor: 'gray',
           headerShown: false
         })}
         >
           <Tab.Screen name="Tåg">
-            {() => <Home delays={delays} setDelays={setDelays} />}
+            {() => <Delays delays={delays} setDelays={setDelays} />}
           </Tab.Screen>
-          <Tab.Screen name="Stationer">
+          <Tab.Screen name="Trafikinfo">
             {() => <StationsNavigate delays={delays} setDelays={setDelays} />}
           </Tab.Screen>
           <Tab.Screen name="Trafikmeddelanden">

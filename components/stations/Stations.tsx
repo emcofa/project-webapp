@@ -83,8 +83,8 @@ export default function Stations({ route }) {
     return (
         <ScrollView>
             <View style={styles.base}>
-                <Text style={styles.info}>{station.AdvertisedLocationName}</Text>
-                <Text style={styles.left}><Text style={styles.bold}>Tåg mot: </Text>{toStation.AdvertisedLocationName}</Text>
+                <Text style={[styles.left, styles.info]}>Tåg från: {station.AdvertisedLocationName}</Text>
+                <Text style={styles.left}><Text style={styles.bold}>Mot: </Text>{toStation.AdvertisedLocationName}</Text>
                 <Text style={styles.left}><Text style={styles.bold}>Tågnummer: </Text>{delay.AdvertisedTrainIdent}</Text>
                 <Text style={styles.left}><Text style={styles.bold}>Ursprunglig avgång: </Text><Text style={styles.red}>{adv}</Text></Text>
                 <Text style={styles.left}><Text style={styles.bold}>Ny förväntad avgång: </Text><Text style={styles.green}>{est}</Text></Text>
@@ -104,12 +104,6 @@ export default function Stations({ route }) {
 }
 
 const styles2 = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,

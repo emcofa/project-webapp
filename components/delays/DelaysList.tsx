@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, } from 'react-native';
+import { Text, StyleSheet, ScrollView, } from 'react-native';
 import styles from "../../styles/Base.js";
 import delayModel from '../../models/delays'
 import { format } from "date-fns";
@@ -32,7 +32,7 @@ export default function DelaysList({ delays, setDelays }) {
 
 
     return (
-        <View>
+        <ScrollView>
             <DataTable>
                 <DataTable.Header>
                     <DataTable.Title>Tågnummer</DataTable.Title>
@@ -41,6 +41,6 @@ export default function DelaysList({ delays, setDelays }) {
                 </DataTable.Header>
                 {list}
             </DataTable>
-        </View>
+        </ScrollView>
     );
 }
