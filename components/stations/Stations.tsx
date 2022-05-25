@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, ScrollView, Dimensions } from 'react-native';
+import { Text, StyleSheet, SafeAreaView } from 'react-native';
 import styles from "../../styles/Base.js";
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import Moment from 'moment';
+import { DataTable } from 'react-native-paper';
 
-import getCoordinates from "../../models/nominatim";
 
 
 export default function Stations({ route }) {
@@ -42,8 +42,9 @@ export default function Stations({ route }) {
     let splitArray = coord.split(' ');
     let long = parseFloat(splitArray[0]);
     let lat = parseFloat(splitArray[1]);
-    let est = Moment(delay.EstimatedTimeAtLocation).format('YYYY-MM-DD HH:mm')
-    let adv = Moment(delay.AdvertisedTimeAtLocation).format('YYYY-MM-DD HH:mm')
+    let date = Moment(delay.EstimatedTimeAtLocation).format('YYYY-MM-DD')
+    let est = Moment(delay.EstimatedTimeAtLocation).format('HH:mm')
+    let adv = Moment(delay.AdvertisedTimeAtLocation).format('HH:mm')
     Moment.locale('sv');
 
     let message = `${timeDiff()} minuter försenat`;
@@ -81,17 +82,12 @@ export default function Stations({ route }) {
     }, []);
 
     return (
-        <ScrollView>
-            <View style={styles.base}>
-                <Text style={[styles.left, styles.info]}>Tåg från: {station.AdvertisedLocationName}</Text>
-                <Text style={styles.left}><Text style={styles.bold}>Mot: </Text>{toStation.AdvertisedLocationName}</Text>
-                <Text style={styles.left}><Text style={styles.bold}>Tågnummer: </Text>{delay.AdvertisedTrainIdent}</Text>
-                <Text style={styles.left}><Text style={styles.bold}>Ursprunglig avgång: </Text><Text style={styles.red}>{adv}</Text></Text>
-                <Text style={styles.left}><Text style={styles.bold}>Ny förväntad avgång: </Text><Text style={styles.green}>{est}</Text></Text>
-            </View>
+        <SafeAreaView style={[styles.container, styles.base]}>
+            <Text style={[styles.center, styles.bold]}> Tåg {delay.AdvertisedTrainIdent}</Text>
+            <Text style={styles.right}>{date}</Text>
             <MapView style={styles2.map}
                 initialRegion={{
-                    latitude: lat - 0.0022,
+                    latitude: lat - 0.0005,
                     longitude: long,
                     latitudeDelta: 0.0075,
                     longitudeDelta: 0.0075,
@@ -99,13 +95,26 @@ export default function Stations({ route }) {
                 {marker}
                 {locationMarker}
             </MapView>
-        </ScrollView>
+            <DataTable>
+                <DataTable.Header>
+                    <DataTable.Title><Text style={styles.typoTableHeader}>Urspr. avg</Text></DataTable.Title>
+                    <DataTable.Title><Text style={styles.typoTableHeader}>Förv. avg</Text></DataTable.Title>
+                    <DataTable.Title><Text style={styles.typoTableHeader}>Station</Text></DataTable.Title>
+                </DataTable.Header>
+                <DataTable.Row>
+                    <DataTable.Cell><Text style={[styles.bold, styles.typoTableBody]}>{adv}</Text></DataTable.Cell>
+                    <DataTable.Cell><Text style={[styles.bold, styles.yellow, styles.typoTableBody]}>{est}</Text></DataTable.Cell>
+                    <DataTable.Cell><Text style={[styles.bold, styles.typoTableBody]}>{station.AdvertisedLocationName}</Text></DataTable.Cell>
+                </DataTable.Row>
+                <Text style={[styles.bold, styles.center]}>Slutdestination: {toStation.AdvertisedLocationName}</Text>
+            </DataTable>
+        </SafeAreaView>
     );
 }
 
 const styles2 = StyleSheet.create({
     map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        width: "100%",
+        height: 400,
     },
 });

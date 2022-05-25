@@ -8,7 +8,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useState, useEffect } from 'react';
 import styles from "./styles/Base.js";
-import FlashMessage from "react-native-flash-message";
 import { LogBox } from "react-native";
 
 LogBox.ignoreLogs([

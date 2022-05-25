@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, ScrollView, } from 'react-native';
 import styles from "../../styles/Base.js";
 import delayModel from '../../models/delays'
-import { format } from "date-fns";
-import { DataTable } from 'react-native-paper';
-import Moment from 'moment';
 import messageModel from '../../models/messages'
 
 
-export default function StockList({ delays, setDelays }) {
+export default function StockList({ setDelays }) {
 
     const [messages, setMessages] = useState([]);
 

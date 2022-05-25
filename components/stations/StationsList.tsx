@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from "../../styles/Base.js";
-import { DataTable } from 'react-native-paper';
-
-import {
-    SafeAreaView,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    FlatList,
-    TextInput,
-} from 'react-native';
-
+import { SafeAreaView, Text, View, FlatList, TextInput, ScrollView } from 'react-native';
 import Moment from 'moment';
 import stationModel from '../../models/stations';
 import delayModel from '../../models/delays';
@@ -68,24 +57,26 @@ export default function SearchStations({ navigation, delays, setDelays }) {
 
     const ItemView = ({ item }) => {
         return (
-            <Text
-                style={styles.itemStyle}
-                onPress={() => {
-                    let len = Object.keys(item).length
-                    if (len < 7) {
-                        alert("Station saknas för tillfället");
-                    } else {
-                        navigation.navigate('Tågdetaljer', {
-                            stations: stations,
-                            delay: item
-                        });
-                    };
-                }}>
-                <View>
-                    <Text style={[styles.bigger, styles.left]}>Tågnummer: {item.AdvertisedTrainIdent}</Text>
-                    <Text style={[styles.red, styles.left]}>Ursprunglig avgång: {Moment(item.AdvertisedTimeAtLocation).format('HH:mm')}</Text>
-                </View>
-            </Text>
+            <ScrollView>
+                <Text
+                    style={styles.itemStyle}
+                    onPress={() => {
+                        let len = Object.keys(item).length
+                        if (len < 7) {
+                            alert("Station saknas för tillfället");
+                        } else {
+                            navigation.navigate('Information om försening', {
+                                stations: stations,
+                                delay: item
+                            });
+                        };
+                    }}>
+                    <View>
+                        <Text style={[styles.bigger, styles.left]}>Tågnummer: {item.AdvertisedTrainIdent}</Text>
+                        <Text style={[styles.bold, styles.left]}>Ursprunglig avgång: {Moment(item.AdvertisedTimeAtLocation).format('HH:mm')}</Text>
+                    </View>
+                </Text>
+            </ScrollView>
         );
     };
 
@@ -102,7 +93,7 @@ export default function SearchStations({ navigation, delays, setDelays }) {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.base}>
                 <TextInput
                     style={styles.textInputStyle}

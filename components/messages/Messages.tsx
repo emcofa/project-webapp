@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Text, StyleSheet, ScrollView, } from 'react-native';
+import { Text, ScrollView, } from 'react-native';
 import styles from "../../styles/Base.js";
 import MessageList from './MessageList';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,9 +12,9 @@ import messageModel from '../../models/messages'
 export default function Delays({ delays, setDelays }) {
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.base}>
-                <Text style={styles.info}>Trafikmeddelanden</Text>
+        <SafeAreaView style={[styles.container, styles.base]}>
+            <ScrollView>
+                <Text style={[styles.info, styles.center]}>Trafikmeddelanden</Text>
                 <MessageList delays={delays} setDelays={setDelays} />
                 <StatusBar style="auto" />
             </ScrollView>
