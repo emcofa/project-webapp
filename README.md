@@ -1,6 +1,6 @@
 # Train Delay Tracker
 
-Train Delay Tracker is a mobile app built with React Native and TypeScript as a final project for the course "Web Applications" at Blekinge Tekniska Högskola. The app allows users to keep track of train delays in real-time using data from the API at [Trafik Proxy API documentation](https://trafik.emilfolino.se). This app is designed to make it easy for commuters and train enthusiasts to stay on top of any delays or cancellations that might impact their travel plans.
+Train Delay Tracker is a mobile app built with React Native and TypeScript as a final project for the course "Web Applications" at Blekinge Institute of Technology. The app allows users to keep track of train delays in real-time using data from the API at [Trafik Proxy API documentation](https://trafik.emilfolino.se). This app is designed to make it easy for commuters and train enthusiasts to stay on top of any delays or cancellations that might impact their travel plans.
 
 ## Installation
 
